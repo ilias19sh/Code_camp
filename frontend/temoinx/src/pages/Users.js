@@ -12,8 +12,8 @@ function Users() {
   }, []);
 
   return (
-    <div>
-      <h2>Liste des utilisateurs</h2>
+    <div className="container mx-auto p-6">
+      <h2 className="text-3xl font-bold mb-4">Liste des utilisateurs</h2>
       <UserList users={users} />
       <UserForm />
     </div>

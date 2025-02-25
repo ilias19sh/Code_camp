@@ -5,6 +5,7 @@ import Users from './pages/Users';
 import Reports from './pages/Reports';
 import Header from './components/header';
 import Footer from './components/Footer';
+import './styles.css';
 
 function App() {
   return (
