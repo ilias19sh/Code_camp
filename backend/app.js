@@ -3,10 +3,12 @@ const userRouter = require('./routes/users');
 const SignalementRouter = require('./routes/dénonciations');
 const db = require('./models/db');
 const app = express();
+const cors = require('cors');
 
 app.use(express.json());
-app.use('/users' , userRouter);
-app.use('/signalement', SignalementRouter);
+app.use(cors());
+app.use('/api/v1/temoinx/users' , userRouter);
+app.use('/api/v1/temoinx/signalement', SignalementRouter);
 
 async function auth() {
     try {
