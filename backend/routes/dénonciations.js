@@ -46,4 +46,33 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    const { preuve, statut } = req.body;
+    const id = req.params.id;
+
+
+    try {
+        // Récupérer le signalement existant
+        const signalement = await Signalement.findByPk(id);
+        if (!signalement) {
+            return res.status(404).send(`Signalement non trouvé.`);
+        }
+
+        signalement.preuves = [...signalement.preuves, preuve]; 
+        await signalement.save(); // Sauvegarder les modifications
+
+        // Mettre à jour les autres informations
+        const [updatedSignalement] = await Signalement.update(
+            { preuve, statut },
+            { where: { id } }
+        );
+
+        return res.status(200).send(`Le signalement a été mis à jour avec les nouvelles informations.`);
+        
+    } catch (error) {
+        console.error('Erreur lors de la modification du user:', error);
+        res.status(500).json({ message: "Une erreur s'est produite lors de la modification." });
+    }
+});
+
 module.exports = router;

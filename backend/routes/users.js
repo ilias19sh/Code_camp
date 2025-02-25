@@ -27,7 +27,6 @@ router.get('/:Id' ,async (req, res) =>{
     }
 })
 
-
 router.post('/', async (req, res) => {
     const { pseudo, email, mot_de_passe } = req.body;
     const transaction = await sequelize.transaction();

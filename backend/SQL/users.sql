@@ -1,16 +1,16 @@
 -- Création de la table Utilisateur
 CREATE TABLE Utilisateur (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id PRIMARY KEY DEFAULT,
     pseudo VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     mot_de_passe VARCHAR(255) NOT NULL,
     date_inscription TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    amis UUID[] -- Liste d'ID d'amis
+    amis [] -- Liste d'ID d'amis
 );
 
 -- Création de la table Signalement
 CREATE TABLE Signalement (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id PRIMARY KEY DEFAULT ,
     description TEXT NOT NULL,
     categorie VARCHAR(255) NOT NULL,
     localisation VARCHAR(255),

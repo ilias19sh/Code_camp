@@ -36,8 +36,8 @@ const Signalement = sequelize.define('Signalement', {
     categorie: { type: DataTypes.STRING, allowNull: false },
     localisation: { type: DataTypes.STRING, allowNull: true },
     statut: { 
-        type: DataTypes.ENUM('en attente', 'examiné', 'résolu'), 
-        defaultValue: 'en attente', 
+        type: DataTypes.BOOLEAN, 
+        defaultValue: true, 
         allowNull: false 
     },
     date_creation: { type: DataTypes.DATE, defaultValue: DataTypes.NOW, allowNull: false },
