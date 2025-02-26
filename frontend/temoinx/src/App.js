@@ -5,18 +5,24 @@ import Users from './pages/Users';
 import Reports from './pages/Reports';
 import Header from './components/header';
 import Footer from './components/Footer';
+import ThemeToggle from './components/ThemeToggle';
 import './styles.css';
 
 function App() {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/reports" element={<Reports />} />
-      </Routes>
-      <Footer />
+      <div className="app">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/reports" element={<Reports />} />
+          </Routes>
+        </main>
+        <ThemeToggle />
+        <Footer />
+      </div>
     </Router>
   );
 }

@@ -7,7 +7,7 @@ function Home() {
       {/* Section Hero */}
       <section className="hero">
         <div className="hero-content">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Plateforme de Dénonciation Civique</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Plateforme de Dénonciation Policière </h1>
           <p className="text-xl mb-8">
             Signalez des problèmes dans votre communauté de manière simple, anonyme et efficace.
           </p>
