@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Home() {
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+
+  useEffect(() => {
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic3lsdmFpbmdhbHRpZXIiLCJhIjoiY2tsZ3JoZ3kyMWV3OTJ3cDdrcjM0azh0eiJ9.zH81EkDqnNnXFigXe1f7PQ';
+
+    if (map.current) return; // initialisation unique de la carte
+
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [2.3522, 48.8566], // Paris [lng, lat]
+      zoom: 12
+    });
+
+    // Nettoyage lors du démontage du composant
+    return () => {
+      if (map.current) map.current.remove();
+    };
+  }, []);
+
   return (
     <div>
       {/* Section Hero */}
@@ -141,6 +164,8 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <div ref={mapContainer} style={{ width: '100%', height: '500px' }} />
     </div>
   );
 }
