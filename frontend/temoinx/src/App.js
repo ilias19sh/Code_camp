@@ -29,6 +29,7 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   return (
     <Router>
+      <Header />
       <div className="app">
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -52,6 +53,7 @@ function App() {
           } />
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 }
