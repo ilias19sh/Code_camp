@@ -55,33 +55,13 @@ const Signalement = sequelize.define('Signalement', {
 });
 
 // Table des preuves
-const Preuve = sequelize.define('Preuve', {
-    id: { 
-        type: DataTypes.INTEGER, 
-        primaryKey: true, 
-        autoIncrement: true, 
-    },
-    type: { type: DataTypes.STRING, allowNull: false },
-    url: { type: DataTypes.STRING, allowNull: false },
-    commentaire: { type: DataTypes.TEXT, allowNull: true },
-    id_signalement: { 
-        type: DataTypes.INTEGER, 
-        references: {
-            model: Signalement,
-            key: 'id'
-        },
-        allowNull: false 
-    },
-}, {
-    tableName: 'preuve',
-});
+
 
 // Associations
 Utilisateur.hasMany(Signalement, { foreignKey: 'id_utilisateur' });
 Signalement.belongsTo(Utilisateur, { foreignKey: 'id_utilisateur' });
 
-Signalement.hasMany(Preuve, { foreignKey: 'id_signalement' });
-Preuve.belongsTo(Signalement, { foreignKey: 'id_signalement' });
 
 
-module.exports = { sequelize, Utilisateur, Signalement, Preuve };
+
+module.exports = { sequelize, Utilisateur, Signalement};

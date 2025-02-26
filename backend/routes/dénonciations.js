@@ -1,14 +1,10 @@
 const express = require('express');
-const {sequelize, Signalement, Preuve} = require('../models/db');
+const {sequelize, Signalement} = require('../models/db');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const signalement = await Signalement.findAll({
-            include: [
-                { model: Preuve }
-            ]
-        });
+        const signalement = await Signalement.findAll({});
         res.json(signalement);
         console.log('ok');
     } catch (error) {
@@ -21,10 +17,7 @@ router.get('/:Id', async (req, res) => {
     try {
         const id = req.params.Id;
         const signalement = await Signalement.findAll({
-            where: { id },
-            include: [
-                { model: Preuve }
-            ]
+            where: { id }
         });
         res.send(signalement);
     } catch (error) {
@@ -34,10 +27,10 @@ router.get('/:Id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { description, categorie, localisation, statut, preuves, id_utilisateur } = req.body;
+    const { description, categorie, localisation, preuves, id_utilisateur } = req.body;
     try {
         await Signalement.create({
-            description, categorie, localisation, statut, preuves, id_utilisateur
+            description, categorie, localisation, preuves, id_utilisateur
         });
         res.status(201).json({ message: `Le signalement a été créé` });
     } catch (error) {
