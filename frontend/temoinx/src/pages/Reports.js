@@ -11,6 +11,7 @@ function Reports() {
       try {
         const response = await getSignalements();
         console.log('signalement ok', response);
+        setReports(response)
       } catch (error) {
         console.error('erreur lors de la création du signalement');
       }
