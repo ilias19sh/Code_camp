@@ -34,21 +34,21 @@ function App() {
           <Route path="/login" element={<Login />} />
           
           <Route path="/" element={
-            <ProtectedRoute>
+           // <ProtectedRoute>
               <Home />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } />
           
           <Route path="/users" element={
-            <ProtectedRoute>
+           // <ProtectedRoute>
               <Users />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } />
           
           <Route path="/reports" element={
-            <ProtectedRoute>
+           // <ProtectedRoute>
               <Reports />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           } />
         </Routes>
       </div>

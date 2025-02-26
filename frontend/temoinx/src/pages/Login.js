@@ -14,14 +14,14 @@ const LoginPage = () => {
     try {
       if (isLogin) {
         const response = await getUsers();
-        if (response.some(user => user.email === email && user.mot_de_passe === password)) {
+        /*if (response.some(user => user.email === email && user.mot_de_passe === password)) {
           localStorage.setItem('isAuthenticated', true);
           navigate('/');
         } else {
             localStorage.setItem('isAuthenticated', true);
             navigate('/');
           alert('Identifiants incorrects. Veuillez réessayer.');
-        }
+        }*/
       } else {
         // Création de compte
         await PostUser({
