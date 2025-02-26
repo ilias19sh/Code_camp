@@ -11,17 +11,22 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
-      if (isLogin) {
+      /*if (isLogin) {
         const response = await getUsers();
-        /*if (response.some(user => user.email === email && user.mot_de_passe === password)) {
-          localStorage.setItem('isAuthenticated', true);
-          navigate('/');
-        } else {
+        if (response.some(user => user.email === email && user.mot_de_passe === password)) {
+          const user = response.find(user => user.email === email);
+          if (user && user.mot_de_passe === password) {
             localStorage.setItem('isAuthenticated', true);
+            localStorage.setItem('utilisateur_id', user.id);
             navigate('/');
+          } else {
+            alert('Identifiants incorrects. Veuillez réessayer.');
+          }
+        } else {
           alert('Identifiants incorrects. Veuillez réessayer.');
-        }*/
+        }
       } else {
         // Création de compte
         await PostUser({
@@ -31,7 +36,7 @@ const LoginPage = () => {
         });
         alert('Compte créé avec succès !');
         setIsLogin(true);
-      }
+      }*/
     } catch (error) {
       console.error('Erreur:', error);
       alert(isLogin ? 'Erreur de connexion.' : 'Erreur lors de la création du compte.');

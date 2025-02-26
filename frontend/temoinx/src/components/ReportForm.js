@@ -1,50 +1,27 @@
 import React, { useState } from 'react';
-
+import { PostSignalement } from '../api/ApiTemoinX';
 function ReportForm() {
   const [description, setDescription] = useState('');
   const [categorie, setCategorie] = useState('');
   const [localisation, setLocalisation] = useState('');
-  const [statut, setStatut] = useState('en attente');
+  const [preuves, setpreuves] = useState('aucune');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-
+  const id_utilisateur = localStorage.getItem('utilisateur_id');
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    const report = { 
-      description, 
-      categorie, 
-      localisation, 
-      statut, 
-      preuves: [], 
-      id_utilisateur: 1 
-    };
-
-    try {
-      const response = await fetch('http://localhost:3000/signalement', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(report),
-      });
+    await PostSignalement({
+      description: description,
+      categorie: categorie,
+      localisation: localisation,
+      preuves: preuves,
+      id_utilisateur: id_utilisateur,
+    });
+    alert('Signalement créé avec succès !');
+    setSuccess(true);
       
-      const data = await response.json();
-      console.log(data);
-      
-      setSuccess(true);
-      setDescription('');
-      setCategorie('');
-      setLocalisation('');
-      setStatut('en attente');
-      
-      setTimeout(() => setSuccess(false), 3000);
-    } catch (error) {
-      console.error("Erreur lors de l'envoi du signalement:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   return (
@@ -89,19 +66,6 @@ function ReportForm() {
             onChange={(e) => setLocalisation(e.target.value)} 
             placeholder="Adresse ou lieu de l'incident" 
           />
-        </div>
-        
-        <div>
-          <label className="block text-gray-300 mb-2">Statut</label>
-          <select 
-            value={statut} 
-            onChange={(e) => setStatut(e.target.value)}
-            className="w-full p-3 border-2 border-gray-700 rounded-lg bg-gray-800 text-gray-200"
-          >
-            <option value="en attente">En attente</option>
-            <option value="examiné">Examiné</option>
-            <option value="résolu">Résolu</option>
-          </select>
         </div>
         
         <button 
