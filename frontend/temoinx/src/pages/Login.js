@@ -18,7 +18,8 @@ const LoginPage = () => {
           localStorage.setItem('isAuthenticated', true);
           navigate('/');
         } else {
-            localStorage.setItem('isAuthenticated', true)
+            localStorage.setItem('isAuthenticated', true);
+            navigate('/');
           alert('Identifiants incorrects. Veuillez réessayer.');
         }
       } else {
