@@ -1,27 +1,45 @@
 import React, { useState } from 'react';
 import { PostSignalement } from '../api/ApiTemoinX';
-function ReportForm() {
+import mapboxClient from '@mapbox/mapbox-sdk';
+import mapboxGeocoding from '@mapbox/mapbox-sdk/services/geocoding';
+
+const client = mapboxClient({ accessToken: 'pk.eyJ1Ijoic3lsdmFpbmdhbHRpZXIiLCJhIjoiY2tsZ3JoZ3kyMWV3OTJ3cDdrcjM0azh0eiJ9.zH81EkDqnNnXFigXe1f7PQ' });
+const geocodingService = mapboxGeocoding(client);
+
+function ReportForm({ onLocationAdded }) {
   const [description, setDescription] = useState('');
   const [categorie, setCategorie] = useState('');
   const [localisation, setLocalisation] = useState('');
-  const [preuves, setpreuves] = useState('aucune');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const id_utilisateur = localStorage.getItem('utilisateur_id');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
+    // Géocodage de la localisation
+    const geocodeResponse = await geocodingService
+      .forwardGeocode({
+        query: localisation,
+        limit: 1
+      })
+      .send();
+
+    const coordinates = geocodeResponse.body.features[0].geometry.coordinates;
+
     await PostSignalement({
       description: description,
       categorie: categorie,
       localisation: localisation,
-      preuves: preuves,
       id_utilisateur: id_utilisateur,
     });
+
+    // Appel de la fonction pour ajouter le marqueur
+    onLocationAdded(coordinates);
+
     alert('Signalement créé avec succès !');
     setSuccess(true);
-      
   };
 
   return (
