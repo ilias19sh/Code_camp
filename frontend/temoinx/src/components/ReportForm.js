@@ -49,13 +49,19 @@ function ReportForm() {
         
         <div>
           <label className="block text-gray-300 mb-2">Catégorie</label>
-          <input 
-            type="text" 
+          <select 
             value={categorie} 
             onChange={(e) => setCategorie(e.target.value)} 
-            placeholder="Ex: Fraude, Pollution, Harcèlement..." 
             required 
-          />
+            className="w-full p-3 border-2 border-gray-700 rounded-lg bg-gray-800 text-gray-200"
+          >
+            <option value="" disabled>Sélectionnez une catégorie</option>
+            <option value="Parking gratuit 🚗✅">Parking gratuit 🚗✅</option>
+            <option value="Endroits Calmes & Relaxants 🏖️">Endroits Calmes & Relaxants 🏖️ </option>
+            <option value="Street food incroyable 🍜🔥">Street food incroyable 🍜🔥</option>
+            <option value="Spot secret 🌅👀">Spot secret 🌅👀</option>
+            <option value="Bons Plans & Réductions 💰">Bons Plans & Réductions 💰</option>
+          </select>
         </div>
         
         <div>
