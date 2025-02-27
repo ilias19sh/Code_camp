@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import ReportForm from '../components/ReportForm';
 
 function Home() {
   const mapContainer = useRef(null);
@@ -31,11 +30,7 @@ function Home() {
     };
   }, []);
 
-  const addMarker = (coordinates) => {
-    new mapboxgl.Marker()
-      .setLngLat(coordinates)
-      .addTo(map.current);
-  };
+  
 
   return (
     <div>
@@ -148,7 +143,7 @@ function Home() {
       </section>
 
       <div ref={mapContainer} style={{ width: '100%', height: '500px' }} />
-      <ReportForm onLocationAdded={addMarker} />
+      
     </div>
   );
 }

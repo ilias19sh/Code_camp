@@ -36,7 +36,7 @@ function ReportForm({ onLocationAdded }) {
     });
 
     // Appel de la fonction pour ajouter le marqueur
-    onLocationAdded(coordinates);
+    //onLocationAdded(coordinates);
 
     alert('Signalement créé avec succès !');
     setSuccess(true);
