@@ -9,6 +9,10 @@ function Header() {
     return location.pathname === path;
   };
 
+  const Deconexion = () => {
+    localStorage.setItem('isAuthenticated', false)
+  }
+
   return (
     <header className="bg-white shadow-sm">
       <div className="container mx-auto">
@@ -24,9 +28,6 @@ function Header() {
             <Link to="/reports" className={`nav-link ${isActive('/reports') ? 'active' : ''}`}>
               Signalements
             </Link>
-            <Link to="/users" className={`nav-link ${isActive('/users') ? 'active' : ''}`}>
-              Utilisateurs
-            </Link>
             <Link to="/analytics" className={`nav-link ${isActive('/analytics') ? 'active' : ''}`}>
               Statistiques
             </Link>
@@ -35,6 +36,9 @@ function Header() {
           <div>
             <button className="btn btn-primary">
               Nouveau signalement
+            </button>
+            <button onClick={Deconexion} className="btn btn-danger transition duration-300 ease-in-out transform hover:scale-105 hover:bg-red-600 ml-4">
+              Se déconnecter 
             </button>
           </div>
         </div>
