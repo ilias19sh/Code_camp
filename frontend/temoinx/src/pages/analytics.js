@@ -16,7 +16,12 @@ ChartJS.register(
 
 function Analytics() {
     const [reports, setReports] = useState([]);
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([]);
+    // Ajout des nouveaux états pour les filtres
+    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [selectedCity, setSelectedCity] = useState('all');
+    const [dateRange, setDateRange] = useState('all');
+    const [filteredReports, setFilteredReports] = useState([]);
     const [chartData, setChartData] = useState({
       labels: [],
       datasets: []
@@ -96,6 +101,75 @@ function Analytics() {
       fetchData();
     }, []);
     
+    useEffect(() => {
+        // Filtrer les rapports en fonction des critères sélectionnés
+        let filtered = [...reports];
+
+        if (selectedCategory !== 'all') {
+            filtered = filtered.filter(report => report.categorie === selectedCategory);
+        }
+
+        if (selectedCity !== 'all') {
+            filtered = filtered.filter(report => report.localisation === selectedCity);
+        }
+
+        if (dateRange !== 'all') {
+            const now = new Date();
+            const filterDate = new Date();
+            
+            switch(dateRange) {
+                case 'week':
+                    filterDate.setDate(now.getDate() - 7);
+                    break;
+                case 'month':
+                    filterDate.setMonth(now.getMonth() - 1);
+                    break;
+                case 'year':
+                    filterDate.setFullYear(now.getFullYear() - 1);
+                    break;
+            }
+            
+            filtered = filtered.filter(report => new Date(report.date) >= filterDate);
+        }
+
+        setFilteredReports(filtered);
+        
+        // Mettre à jour les données du graphique avec les données filtrées
+        const typeCount = filtered.reduce((acc, report) => {
+            const reportType = report.categorie || "Non catégorisé";
+            acc[reportType] = (acc[reportType] || 0) + 1;
+            return acc;
+        }, {});
+
+        setChartData({
+            labels: Object.keys(typeCount),
+            datasets: [{
+                label: 'Types de signalements',
+                data: Object.values(typeCount),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(255, 159, 64, 0.8)',
+                    'rgba(201, 203, 207, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(201, 203, 207, 1)'
+                ],
+                borderWidth: 1,
+            }],
+        });
+
+    }, [reports, selectedCategory, selectedCity, dateRange]);
+    
     const options = {
       responsive: true,
       maintainAspectRatio: false,
@@ -120,6 +194,16 @@ function Analytics() {
       }
     };
     
+    // Ajouter avant le return
+    const uniqueCities = [...new Set(reports.map(report => report.localisation))].filter(Boolean);
+    const categories = [
+        'Street food incroyable 🍜🔥',
+        'Parking gratuit 🚗✅',
+        'Endroits Calmes & Relaxants 🏖️',
+        'Spot secret 🌅👀',
+        'Bons Plans & Réductions 💰'
+    ];
+
     return (
       <div className="py-8 sm:py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -127,13 +211,49 @@ function Analytics() {
             Statistiques récentes
           </h2>
           
+          {/* Ajouter la section des filtres */}
+          <div className="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <select 
+                className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+                <option value="all">Toutes les catégories</option>
+                {categories.map(category => (
+                    <option key={category} value={category}>{category}</option>
+                ))}
+            </select>
+
+            <select 
+                className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)}
+            >
+                <option value="all">Toutes les villes</option>
+                {uniqueCities.map(city => (
+                    <option key={city} value={city}>{city}</option>
+                ))}
+            </select>
+
+            <select 
+                className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                value={dateRange}
+                onChange={(e) => setDateRange(e.target.value)}
+            >
+                <option value="all">Toute la période</option>
+                <option value="week">7 derniers jours</option>
+                <option value="month">30 derniers jours</option>
+                <option value="year">12 derniers mois</option>
+            </select>
+          </div>
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
               <div className="text-3xl sm:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                {reports.length || 0}
+                {filteredReports.length || 0}
               </div>
               <div className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
-                Signalements ce mois
+                Signalements filtrés
               </div>
             </div>
             
