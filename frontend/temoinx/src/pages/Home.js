@@ -90,36 +90,6 @@ function Home() {
         </div>
       </section>
 
-      {/* Section Statistiques */}
-      <section className="section">
-        <div className="container">
-          <h2 className="text-center mb-12">Statistiques récentes</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="stat-card">
-              <div className="stat-value">152</div>
-              <div className="stat-label">Signalements ce mois</div>
-            </div>
-            
-            <div className="stat-card">
-              <div className="stat-value">78%</div>
-              <div className="stat-label">Taux de résolution</div>
-            </div>
-            
-            <div className="stat-card">
-              <div className="stat-value">24</div>
-              <div className="stat-label">Communautés actives</div>
-            </div>
-          </div>
-          
-          <div className="text-center mt-8">
-            <Link to="/analytics" className="btn btn-primary">
-              Voir toutes les statistiques
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Section Catégories */}
       <section className="section bg-gray-50">
         <div className="container">

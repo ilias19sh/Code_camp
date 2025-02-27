@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Reports from './pages/Reports';
+import Analytics from './pages/analytics';
 import Header from './components/header';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
@@ -42,6 +43,11 @@ function App() {
           <Route path="/reports" element={
            // <ProtectedRoute>
               <Reports />
+            //</ProtectedRoute>
+          } />
+          <Route path="/analytics" element={
+           // <ProtectedRoute>
+              <Analytics />
             //</ProtectedRoute>
           } />
         </Routes>
