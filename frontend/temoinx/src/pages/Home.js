@@ -24,6 +24,14 @@ function Home() {
     .setPopup(new mapboxgl.Popup().setHTML('<h3>Paris</h3>')) 
     .addTo(map.current); 
 
+    map.current.on('click', (event) => {
+      const { lng, lat } = event.lngLat;
+      new mapboxgl.Marker()
+        .setLngLat([lng, lat])
+        .setPopup(new mapboxgl.Popup().setHTML('<h3>Nouveau Marqueur</h3>'))
+        .addTo(map.current);
+    });
+
     // Nettoyage lors du démontage du composant
     return () => {
       if (map.current) map.current.remove();
