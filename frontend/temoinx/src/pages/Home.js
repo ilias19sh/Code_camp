@@ -35,17 +35,25 @@ function Home() {
   return (
     <div>
       {/* Section Hero */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Plateforme de Dénonciation Policière </h1>
-          <p className="text-xl mb-8">
-            Signalez des problèmes dans votre communauté de manière simple, anonyme et efficace.
+      <section className="hero min-h-[60vh] flex items-center justify-center p-4 sm:p-8">
+        <div className="hero-content text-center max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
+            Plateforme de D'aide citoyenne
+          </h1>
+          <p className="text-lg sm:text-xl mb-8 max-w-2xl mx-auto">
+            Signalez vos bons plans de manière simple, anonyme et efficace.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link to="/reports/new" className="btn btn-lg bg-white text-blue-600 hover:bg-gray-100">
+            <Link 
+              to="/reports/new" 
+              className="btn btn-lg bg-white text-blue-600 hover:bg-gray-100 w-full sm:w-auto px-8"
+            >
               Faire un signalement
             </Link>
-            <Link to="/analytics" className="btn btn-lg btn-outline text-white border-white hover:bg-blue-700">
+            <Link 
+              to="/analytics" 
+              className="btn btn-lg btn-outline text-white border-white hover:bg-blue-700 w-full sm:w-auto px-8"
+            >
               Voir les statistiques
             </Link>
           </div>
@@ -142,7 +150,10 @@ function Home() {
         </div>
       </section>
 
-      <div ref={mapContainer} style={{ width: '100%', height: '500px' }} />
+      <div 
+        ref={mapContainer} 
+        className="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-lg shadow-lg my-8"
+      />
       
     </div>
   );

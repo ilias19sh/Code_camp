@@ -69,11 +69,11 @@ function Reports() {
   ];
 
   return (
-    <div className="container mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-4">Liste des signalements</h2>
+    <div className="container mx-auto p-4 sm:p-6">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4">Liste des signalements</h2>
       
       {/* Filtres */}
-      <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <select 
           className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
           value={selectedCategory}
@@ -108,13 +108,19 @@ function Reports() {
         </select>
       </div>
 
-      {/* Afficher le nombre de résultats filtrés */}
-      <div className="mb-4 text-gray-600">
+      <div className="mb-4 text-gray-600 text-sm sm:text-base">
         {filteredReports.length} signalement(s) trouvé(s)
       </div>
 
-      <ReportList reports={filteredReports} />
-      <ReportForm />
+      {/* Liste des signalements */}
+      <div className="grid gap-4 sm:gap-6">
+        <ReportList reports={filteredReports} />
+      </div>
+
+      {/* Formulaire */}
+      <div className="mt-8">
+        <ReportForm />
+      </div>
     </div>
   );
 }

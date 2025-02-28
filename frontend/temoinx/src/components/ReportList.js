@@ -2,37 +2,30 @@ import React from 'react';
 
 function ReportList({ reports }) {
   return (
-    <div className="container mx-auto">
-      {reports.length === 0 ? (
-        <p className="text-center text-gray-400">Aucun signalement trouvé</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reports.map((report, index) => (
-            <div 
-              key={report.id} 
-              className="card" 
-              style={{animationDelay: `${index * 0.1}s`}}
-            >
-              <h3 className="text-xl font-bold mb-3">{report.categorie}</h3>
-              <p className="text-gray-300 mb-4">{report.description}</p>
-              <div className="flex justify-between items-center">
-                <span className={`status-badge ${
-                  report.statut === 'en attente' ? 'status-pending' : 
-                  report.statut === 'examiné' ? 'status-reviewed' : 
-                  'status-resolved'
-                }`}>
-                  {report.statut}
-                </span>
-                {report.localisation && (
-                  <span className="text-gray-400 text-sm">
-                    <i className="fas fa-map-marker-alt mr-1"></i> {report.localisation}
-                  </span>
-                )}
-              </div>
+    <div className="grid gap-4 sm:gap-6">
+      {reports.map(report => (
+        <div 
+          key={report.id} 
+          className="bg-white rounded-lg shadow-lg p-4 sm:p-6 hover:shadow-xl transition-shadow"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">{report.categorie}</h3>
+              <p className="text-gray-600 text-sm sm:text-base mb-2">{report.description}</p>
+              <p className="text-gray-500 text-sm">
+                📍 {report.localisation} • 🕒 {new Date(report.date).toLocaleDateString()}
+              </p>
             </div>
-          ))}
+            <div className="flex flex-wrap gap-2">
+              <span className={`px-3 py-1 rounded-full text-sm ${
+                report.statut ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              }`}>
+                {report.statut ? 'Actif' : 'Expiré'}
+              </span>
+            </div>
+          </div>
         </div>
-      )}
+      ))}
     </div>
   );
 }

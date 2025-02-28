@@ -43,18 +43,29 @@ function ReportForm({ onLocationAdded }) {
   };
 
   return (
-    <div className="container mx-auto">
-      <h3 className="text-2xl font-bold mb-6">Créer un nouveau signalement</h3>
+    <form className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+      <h3 className="text-xl sm:text-2xl font-bold mb-4">Nouveau signalement</h3>
       
-      {success && (
-        <div className="notification bg-indigo-900 text-indigo-200 p-4 rounded-lg mb-6">
-          Signalement créé avec succès!
+      <div className="grid gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Catégorie</label>
+            <select className="w-full p-2 border rounded-lg">
+              {/* ... options ... */}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Localisation</label>
+            <input 
+              type="text" 
+              className="w-full p-2 border rounded-lg"
+              placeholder="Entrez une adresse"
+            />
+          </div>
         </div>
-      )}
-      
-      <form onSubmit={handleSubmit} className="space-y-6">
+
         <div>
-          <label className="block text-gray-300 mb-2">Description</label>
+          <label className="block text-sm font-medium mb-1">Description</label>
           <textarea 
             value={description} 
             onChange={(e) => setDescription(e.target.value)} 
@@ -65,33 +76,6 @@ function ReportForm({ onLocationAdded }) {
           />
         </div>
         
-        <div>
-          <label className="block text-gray-300 mb-2">Catégorie</label>
-          <select 
-            value={categorie} 
-            onChange={(e) => setCategorie(e.target.value)} 
-            required 
-            className="w-full p-3 border-2 border-gray-700 rounded-lg bg-gray-800 text-gray-200"
-          >
-            <option value="" disabled>Sélectionnez une catégorie</option>
-            <option value="Parking gratuit 🚗✅">Parking gratuit 🚗✅</option>
-            <option value="Endroits Calmes & Relaxants 🏖️">Endroits Calmes & Relaxants 🏖️ </option>
-            <option value="Street food incroyable 🍜🔥">Street food incroyable 🍜🔥</option>
-            <option value="Spot secret 🌅👀">Spot secret 🌅👀</option>
-            <option value="Bons Plans & Réductions 💰">Bons Plans & Réductions 💰</option>
-          </select>
-        </div>
-        
-        <div>
-          <label className="block text-gray-300 mb-2">Localisation</label>
-          <input 
-            type="text" 
-            value={localisation} 
-            onChange={(e) => setLocalisation(e.target.value)} 
-            placeholder="Adresse ou lieu de l'incident" 
-          />
-        </div>
-        
         <button 
           type="submit" 
           disabled={isSubmitting}
@@ -99,8 +83,8 @@ function ReportForm({ onLocationAdded }) {
         >
           <span>{isSubmitting ? 'Envoi en cours...' : 'Créer un signalement'}</span>
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }
 

@@ -13,7 +13,7 @@ const LoginPage = () => {
     e.preventDefault();
     
     try {
-      /*if (isLogin) {
+      if (isLogin) {
         const response = await getUsers();
         if (response.some(user => user.email === email && user.mot_de_passe === password)) {
           const user = response.find(user => user.email === email);
@@ -36,7 +36,7 @@ const LoginPage = () => {
         });
         alert('Compte créé avec succès !');
         setIsLogin(true);
-      }*/
+      }
     } catch (error) {
       console.error('Erreur:', error);
       alert(isLogin ? 'Erreur de connexion.' : 'Erreur lors de la création du compte.');

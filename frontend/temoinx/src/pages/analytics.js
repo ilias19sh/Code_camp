@@ -205,50 +205,51 @@ function Analytics() {
     ];
 
     return (
-      <div className="py-8 sm:py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800 ">
+      <div className="py-4 sm:py-8">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-10 text-gray-800">
             Statistiques récentes
           </h2>
           
-          {/* Ajouter la section des filtres */}
-          <div className="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* Filtres */}
+          <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <select 
-                className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+              className="p-2 border rounded-lg w-full"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
             >
-                <option value="all">Toutes les catégories</option>
-                {categories.map(category => (
-                    <option key={category} value={category}>{category}</option>
-                ))}
+              <option value="all">Toutes les catégories</option>
+              {categories.map(category => (
+                  <option key={category} value={category}>{category}</option>
+              ))}
             </select>
 
             <select 
-                className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
-                value={selectedCity}
-                onChange={(e) => setSelectedCity(e.target.value)}
+              className="p-2 border rounded-lg w-full"
+              value={selectedCity}
+              onChange={(e) => setSelectedCity(e.target.value)}
             >
-                <option value="all">Toutes les villes</option>
-                {uniqueCities.map(city => (
-                    <option key={city} value={city}>{city}</option>
-                ))}
+              <option value="all">Toutes les villes</option>
+              {uniqueCities.map(city => (
+                  <option key={city} value={city}>{city}</option>
+              ))}
             </select>
 
             <select 
-                className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
-                value={dateRange}
-                onChange={(e) => setDateRange(e.target.value)}
+              className="p-2 border rounded-lg w-full"
+              value={dateRange}
+              onChange={(e) => setDateRange(e.target.value)}
             >
-                <option value="all">Toute la période</option>
-                <option value="week">7 derniers jours</option>
-                <option value="month">30 derniers jours</option>
-                <option value="year">12 derniers mois</option>
+              <option value="all">Toute la période</option>
+              <option value="week">7 derniers jours</option>
+              <option value="month">30 derniers jours</option>
+              <option value="year">12 derniers mois</option>
             </select>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
+          {/* Cartes statistiques */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
               <div className="text-3xl sm:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                 {filteredReports.length || 0}
               </div>
@@ -257,7 +258,7 @@ function Analytics() {
               </div>
             </div>
             
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
+            <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
               <div className="text-3xl sm:text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
                 {reports.length > 0 ? ((reports.filter(report => report.statut === false).length / reports.length) * 100).toFixed(0) + '%' : '0%'}
               </div>
@@ -266,7 +267,7 @@ function Analytics() {
               </div>
             </div>
             
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
+            <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
               <div className="text-3xl sm:text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">
                 {users.length || 0}
               </div>
@@ -276,12 +277,9 @@ function Analytics() {
             </div>
           </div>
           
-
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mt-8">
-          <div className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
-                Graphique des types de signalement
-              </div>
-            <div className="h-[400px] w-full">
+          {/* Graphique */}
+          <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 mt-6">
+            <div className="h-[300px] sm:h-[400px]">
               {chartData.labels.length > 0 && (
                 <Pie data={chartData} options={options} />
               )}

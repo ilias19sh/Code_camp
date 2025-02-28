@@ -29,30 +29,28 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   return (
     <Router>
-      <Header />
       <div className="app">
         <Routes>
           <Route path="/login" element={<Login />} />
           
           <Route path="/" element={
-           // <ProtectedRoute>
+            <ProtectedRoute>
               <Home />
-            //</ProtectedRoute>
+            </ProtectedRoute>
           } />
           
           <Route path="/reports" element={
-           // <ProtectedRoute>
+            <ProtectedRoute>
               <Reports />
-            //</ProtectedRoute>
+            </ProtectedRoute>
           } />
           <Route path="/analytics" element={
-           // <ProtectedRoute>
+            <ProtectedRoute>
               <Analytics />
-            //</ProtectedRoute>
+            </ProtectedRoute>
           } />
         </Routes>
       </div>
-      <Footer />
     </Router>
   );
 }
