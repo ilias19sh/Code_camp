@@ -19,12 +19,12 @@ function Header() {
     <header className="bg-white shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-          {/* Logo */}
+
           <Link to="/" className="flex items-center space-x-2 z-20">
             <span className="text-xl font-bold text-blue-600">SpotIt</span>
           </Link>
 
-          {/* Bouton hamburger pour mobile */}
+
           <button
             className="lg:hidden z-20 p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}

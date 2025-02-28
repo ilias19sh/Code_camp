@@ -28,7 +28,7 @@ const LoginPage = () => {
           alert('Identifiants incorrects. Veuillez réessayer.');
         }
       } else {
-        // Création de compte
+        
         await PostUser({
           pseudo: pseudo,
           email: email,

@@ -72,7 +72,7 @@ function Reports() {
     <div className="container mx-auto p-4 sm:p-6">
       <h2 className="text-2xl sm:text-3xl font-bold mb-4">Liste des signalements</h2>
       
-      {/* Filtres */}
+     
       <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <select 
           className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
@@ -112,12 +112,12 @@ function Reports() {
         {filteredReports.length} signalement(s) trouvé(s)
       </div>
 
-      {/* Liste des signalements */}
+     
       <div className="grid gap-4 sm:gap-6">
         <ReportList reports={filteredReports} />
       </div>
 
-      {/* Formulaire */}
+    
       <div className="mt-8">
         <ReportForm />
       </div>

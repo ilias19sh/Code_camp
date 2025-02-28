@@ -10,12 +10,12 @@ function Home() {
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1Ijoic3lsdmFpbmdhbHRpZXIiLCJhIjoiY2tsZ3JoZ3kyMWV3OTJ3cDdrcjM0azh0eiJ9.zH81EkDqnNnXFigXe1f7PQ';
 
-    if (map.current) return; // initialisation unique de la carte
+    if (map.current) return; 
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [2.3522, 48.8566], // Paris [lng, lat]
+      center: [2.3522, 48.8566],
       zoom: 12
     });
 
@@ -32,7 +32,7 @@ function Home() {
         .addTo(map.current);
     });
 
-    // Nettoyage lors du démontage du composant
+    
     return () => {
       if (map.current) map.current.remove();
     };
@@ -42,7 +42,7 @@ function Home() {
 
   return (
     <div>
-      {/* Section Hero */}
+      
       <section className="hero min-h-[60vh] flex items-center justify-center p-4 sm:p-8">
         <div className="hero-content text-center max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
@@ -68,7 +68,7 @@ function Home() {
         </div>
       </section>
 
-      {/* Section Comment ça marche */}
+      
       <section className="section bg-gray-50">
         <div className="container">
           <h2 className="text-center mb-12">Comment ça marche</h2>
@@ -113,7 +113,7 @@ function Home() {
         </div>
       </section>
 
-      {/* Section Catégories */}
+     
       <section className="section bg-gray-50">
         <div className="container">
           <h2 className="text-center mb-12">Catégories de signalements</h2>

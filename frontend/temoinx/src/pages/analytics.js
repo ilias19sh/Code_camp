@@ -17,7 +17,7 @@ ChartJS.register(
 function Analytics() {
     const [reports, setReports] = useState([]);
     const [users, setUsers] = useState([]);
-    // Ajout des nouveaux états pour les filtres
+   
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [selectedCity, setSelectedCity] = useState('all');
     const [dateRange, setDateRange] = useState('all');
@@ -35,9 +35,9 @@ function Analytics() {
           console.log('Données des signalements:', response);
           setReports(response);
           
-          // Calculer les statistiques par type
+         
           const typeCount = response.reduce((acc, report) => {
-            // Vérifier si le type existe, sinon utiliser "Non catégorisé"
+            
             const reportType = report.categorie||  "Non catégorisé";
             acc[reportType] = (acc[reportType] || 0) + 1;
             return acc;
@@ -45,7 +45,7 @@ function Analytics() {
 
           console.log('Comptage par type:', typeCount);
 
-          // Préparer les données pour le graphique
+          
           setChartData({
             labels: Object.keys(typeCount),
             datasets: [{
@@ -73,14 +73,14 @@ function Analytics() {
             }],
           });
 
-          // Calculer le top 3 des localisations
+          
           const locationCount = response.reduce((acc, report) => {
             const location = report.localisation || "Non spécifié";
             acc[location] = (acc[location] || 0) + 1;
             return acc;
           }, {});
 
-          // Trier et prendre les 3 premiers
+      
           const sortedLocations = Object.entries(locationCount)
             .sort(([,a], [,b]) => b - a)
             .slice(0, 3)
@@ -102,7 +102,7 @@ function Analytics() {
     }, []);
     
     useEffect(() => {
-        // Filtrer les rapports en fonction des critères sélectionnés
+        
         let filtered = [...reports];
 
         if (selectedCategory !== 'all') {
@@ -194,7 +194,7 @@ function Analytics() {
       }
     };
     
-    // Ajouter avant le return
+
     const uniqueCities = [...new Set(reports.map(report => report.localisation))].filter(Boolean);
     const categories = [
         'Street food incroyable 🍜🔥',
@@ -205,51 +205,50 @@ function Analytics() {
     ];
 
     return (
-      <div className="py-4 sm:py-8">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-10 text-gray-800">
+      <div className="py-8 sm:py-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800 ">
             Statistiques récentes
           </h2>
           
-          {/* Filtres */}
-          <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+         
+          <div className="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
             <select 
-              className="p-2 border rounded-lg w-full"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
+                className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
             >
-              <option value="all">Toutes les catégories</option>
-              {categories.map(category => (
-                  <option key={category} value={category}>{category}</option>
-              ))}
+                <option value="all">Toutes les catégories</option>
+                {categories.map(category => (
+                    <option key={category} value={category}>{category}</option>
+                ))}
             </select>
 
             <select 
-              className="p-2 border rounded-lg w-full"
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.target.value)}
+                className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)}
             >
-              <option value="all">Toutes les villes</option>
-              {uniqueCities.map(city => (
-                  <option key={city} value={city}>{city}</option>
-              ))}
+                <option value="all">Toutes les villes</option>
+                {uniqueCities.map(city => (
+                    <option key={city} value={city}>{city}</option>
+                ))}
             </select>
 
             <select 
-              className="p-2 border rounded-lg w-full"
-              value={dateRange}
-              onChange={(e) => setDateRange(e.target.value)}
+                className="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                value={dateRange}
+                onChange={(e) => setDateRange(e.target.value)}
             >
-              <option value="all">Toute la période</option>
-              <option value="week">7 derniers jours</option>
-              <option value="month">30 derniers jours</option>
-              <option value="year">12 derniers mois</option>
+                <option value="all">Toute la période</option>
+                <option value="week">7 derniers jours</option>
+                <option value="month">30 derniers jours</option>
+                <option value="year">12 derniers mois</option>
             </select>
           </div>
           
-          {/* Cartes statistiques */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
               <div className="text-3xl sm:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                 {filteredReports.length || 0}
               </div>
@@ -258,7 +257,7 @@ function Analytics() {
               </div>
             </div>
             
-            <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
               <div className="text-3xl sm:text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
                 {reports.length > 0 ? ((reports.filter(report => report.statut === false).length / reports.length) * 100).toFixed(0) + '%' : '0%'}
               </div>
@@ -267,7 +266,7 @@ function Analytics() {
               </div>
             </div>
             
-            <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
               <div className="text-3xl sm:text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">
                 {users.length || 0}
               </div>
@@ -277,9 +276,12 @@ function Analytics() {
             </div>
           </div>
           
-          {/* Graphique */}
-          <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 mt-6">
-            <div className="h-[300px] sm:h-[400px]">
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mt-8">
+          <div className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                Graphique des types de signalement
+              </div>
+            <div className="h-[400px] w-full">
               {chartData.labels.length > 0 && (
                 <Pie data={chartData} options={options} />
               )}
@@ -323,7 +325,7 @@ function Analytics() {
             </div>
           </div>
 
-          {/* Top 3 des localisations */}
+          
           <div className="mt-8">
             <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6">
               Top 3 des localisations les plus actives
@@ -334,7 +336,7 @@ function Analytics() {
                   key={loc.location}
                   className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 relative overflow-hidden"
                 >
-                  {/* Badge de position */}
+                 
                   <div className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold
                     ${index === 0 ? 'bg-yellow-500' : index === 1 ? 'bg-gray-400' : 'bg-orange-600'}`}
                   >
